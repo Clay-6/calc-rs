@@ -1,7 +1,38 @@
 #![allow(non_snake_case)]
+use std::env;
 
 fn main() {
-    Fibonacci::UpTo(1000);
+    let args: Vec<String> = env::args().collect();
+    let command = &args[1];
+
+    if *command == String::from("h") {
+        ShowHelp();
+    } else if *command == String::from("sqrt") {
+        let num = &args[2].parse::<f64>().unwrap();
+        let iters = &args[3].parse::<u32>().unwrap();
+        println!("{}", Sqrt(*num, *iters));
+    } else if *command == String::from("fac") {
+        let num = &args[2].parse::<u64>().unwrap();
+        println!("{}", Factorial(*num));
+    } else if *command == String::from("fib-upto") {
+        let max = &args[2].parse::<u64>().unwrap();
+        Fibonacci::UpTo(*max);
+    } else if *command == String::from("fib-oflen") {
+        let limit = &args[2].parse::<u64>().unwrap();
+        Fibonacci::OfLength(*limit);
+    } else {
+        println!("Invalid command \"{}\"", &command);
+        ShowHelp();
+    }
+}
+
+fn ShowHelp() {
+    println!("The valid arguments are:");
+    println!("h - Show help");
+    println!("sqrt [n] [i] - Calculate the square root of [n] with [i] iterations");
+    println!("fac [n] - Calculate the factorial of [n]");
+    println!("fib-upto [n] - Show a fibonacci sequence up to [n]");
+    println!("fib-oflen - Show a fibonacci sequence of length n");
 }
 
 fn Sqrt(num: f64, iters: u32) -> f64 {
