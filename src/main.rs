@@ -62,11 +62,11 @@ fn Factorial(n: u64) -> u64 {
     return ans;
 }
 fn Pow(base: i64, exp: u64) -> i64 {
-    let mut ans = 1;
-
     if exp == 0 {
         return 1;
     }
+
+    let mut ans = 1;
 
     for _ in 1..=exp {
         ans *= base;
