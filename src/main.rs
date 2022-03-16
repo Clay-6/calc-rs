@@ -21,8 +21,10 @@ fn main() {
         let limit = &args[2].parse::<u64>().unwrap();
         Fibonacci::OfLength(*limit);
     } else {
-        println!("Invalid command \"{}\"", &command);
-        ShowHelp();
+        eprintln!(
+            "Error: Invalid command \"{}\". Use command 'h' to see valid commands",
+            &command
+        );
     }
 }
 
