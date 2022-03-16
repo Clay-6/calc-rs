@@ -7,6 +7,10 @@ fn main() {
 
     if *command == String::from("h") {
         ShowHelp();
+    } else if *command == String::from("pow") {
+        let base = *&args[2].parse::<i64>().unwrap();
+        let exp = *&args[3].parse::<u64>().unwrap();
+        println!("{}", Pow(base, exp));
     } else if *command == String::from("sqrt") {
         let num = &args[2].parse::<f64>().unwrap();
         let iters = &args[3].parse::<u32>().unwrap();
@@ -31,6 +35,7 @@ fn main() {
 fn ShowHelp() {
     println!("The valid arguments are:");
     println!("h - Show help");
+    println!("pow [n] [e] - Calculate [n] to the power of [e]");
     println!("sqrt [n] [i] - Calculate the square root of [n] with [i] iterations");
     println!("fac [n] - Calculate the factorial of [n]");
     println!("fib-upto [n] - Show a fibonacci sequence up to [n]");
@@ -52,6 +57,19 @@ fn Factorial(n: u64) -> u64 {
 
     for i in 1..=n {
         ans *= i;
+    }
+
+    return ans;
+}
+fn Pow(base: i64, exp: u64) -> i64 {
+    let mut ans = 1;
+
+    if exp == 0 {
+        return 1;
+    }
+
+    for _ in 1..=exp {
+        ans *= base;
     }
 
     return ans;
