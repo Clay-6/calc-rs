@@ -11,7 +11,7 @@ pub mod Utils {
         println!("fib-oflen - Show a fibonacci sequence of length n");
     }
 }
-pub mod Numerical {
+pub mod Arithmetic {
     pub fn Sqrt(num: f64, iters: u32) -> f64 {
         let mut mean = (num + 1.0) / 2.0;
 
@@ -70,17 +70,17 @@ mod Tests {
     use super::*;
     #[test]
     fn TestPow() {
-        assert_eq!(Numerical::Pow(4, 4), 256);
-        assert_eq!(Numerical::Pow(17, 0), 1);
+        assert_eq!(Arithmetic::Pow(4, 4), 256);
+        assert_eq!(Arithmetic::Pow(17, 0), 1);
     }
 
     #[test]
     fn TestFact() {
-        assert_eq!(Numerical::Factorial(5), 120);
+        assert_eq!(Arithmetic::Factorial(5), 120);
     }
 
     #[test]
     fn TestSqrt() {
-        assert_eq!(Numerical::Sqrt(5_f64, 10).round(), 2_f64);
+        assert_eq!(Arithmetic::Sqrt(5_f64, 10).round(), 2_f64);
     }
 }

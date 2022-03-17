@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 use std::env;
 
-use Calculator::{Fibonacci, Numerical, Utils};
+use Calculator::{Arithmetic, Fibonacci, Utils};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -12,14 +12,14 @@ fn main() {
     } else if *command == String::from("pow") {
         let base = *&args[2].parse::<i64>().unwrap();
         let exp = *&args[3].parse::<u64>().unwrap();
-        println!("{}", Numerical::Pow(base, exp));
+        println!("{}", Arithmetic::Pow(base, exp));
     } else if *command == String::from("sqrt") {
         let num = &args[2].parse::<f64>().unwrap();
         let iters = &args[3].parse::<u32>().unwrap();
-        println!("{}", Numerical::Sqrt(*num, *iters));
+        println!("{}", Arithmetic::Sqrt(*num, *iters));
     } else if *command == String::from("fac") {
         let num = &args[2].parse::<u64>().unwrap();
-        println!("{}", Numerical::Factorial(*num));
+        println!("{}", Arithmetic::Factorial(*num));
     } else if *command == String::from("fib-upto") {
         let max = &args[2].parse::<u64>().unwrap();
         Fibonacci::UpTo(*max);
