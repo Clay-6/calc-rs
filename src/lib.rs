@@ -8,7 +8,7 @@ pub mod Utils {
         println!("sqrt [n] [i] - Calculate the square root of [n] with [i] iterations");
         println!("fac [n] - Calculate the factorial of [n]");
         println!("fib-upto [n] - Show a fibonacci sequence up to [n]");
-        println!("fib-oflen - Show a fibonacci sequence of length n");
+        println!("fib-oflen [n] - Show a fibonacci sequence of length [n]");
     }
 }
 pub mod Arithmetic {
