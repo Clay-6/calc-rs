@@ -10,21 +10,31 @@ fn main() {
     if *command == String::from("h") {
         Utils::ShowHelp();
     } else if *command == String::from("pow") {
-        let base = *&args[2].parse::<i64>().unwrap();
-        let exp = *&args[3].parse::<u64>().unwrap();
+        let base = *&args[2].parse::<i64>().expect("Please enter a whole number");
+        let exp = *&args[3]
+            .parse::<u64>()
+            .expect("Please enter a positive whole number");
         println!("{}", Arithmetic::Pow(base, exp));
     } else if *command == String::from("sqrt") {
-        let num = &args[2].parse::<f64>().unwrap();
-        let iters = &args[3].parse::<u32>().unwrap();
+        let num = &args[2].parse::<f64>().expect("Please enter a valid number");
+        let iters = &args[3]
+            .parse::<u32>()
+            .expect("Please enter a positive whole number");
         println!("{}", Arithmetic::Sqrt(*num, *iters));
     } else if *command == String::from("fac") {
-        let num = &args[2].parse::<u64>().unwrap();
+        let num = &args[2]
+            .parse::<u64>()
+            .expect("Please enter a positive whole number");
         println!("{}", Arithmetic::Factorial(*num));
     } else if *command == String::from("fib-upto") {
-        let max = &args[2].parse::<u64>().unwrap();
+        let max = &args[2]
+            .parse::<u64>()
+            .expect("Please enter a positive whole number");
         Fibonacci::UpTo(*max);
     } else if *command == String::from("fib-oflen") {
-        let limit = &args[2].parse::<u64>().unwrap();
+        let limit = &args[2]
+            .parse::<u64>()
+            .expect("Please enter a positive whole number");
         Fibonacci::OfLength(*limit);
     } else {
         eprintln!(

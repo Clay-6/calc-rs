@@ -2,7 +2,7 @@
 
 pub mod Utils {
     pub fn ShowHelp() {
-        println!("The valid arguments are:");
+        println!("The valid commands are:");
         println!("h - Show help");
         println!("pow [n] [e] - Calculate [n] to the power of [e]");
         println!("sqrt [n] [i] - Calculate the square root of [n] with [i] iterations");
