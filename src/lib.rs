@@ -31,18 +31,21 @@ pub mod Arithmetic {
 
         return ans;
     }
-    pub fn Pow(base: f64, exp: u64) -> f64 {
+    pub fn Pow(base: f64, exp: i64) -> f64 {
         if exp == 0 {
             return 1_f64;
         }
 
         let mut ans = 1.0;
 
-        for _ in 1..=exp {
+        for _ in 1..=exp.abs() {
             ans *= base;
         }
-
-        return ans;
+        if exp < 0 {
+            return 1.0 / ans;
+        } else {
+            return ans;
+        }
     }
 }
 
@@ -73,10 +76,11 @@ mod Tests {
         assert_eq!(Arithmetic::Pow(4_f64, 4), 256_f64);
         assert_eq!(Arithmetic::Pow(17_f64, 0), 1_f64);
         assert_eq!(Arithmetic::Pow(2.5, 3), 15.625);
+        assert_eq!(Arithmetic::Pow(16.0, -2), 0.00390625);
     }
 
     #[test]
-    fn TestFact() {
+    fn TestFactorial() {
         assert_eq!(Arithmetic::Factorial(5), 120);
     }
 
