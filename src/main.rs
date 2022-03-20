@@ -10,7 +10,7 @@ fn main() {
     if *command == String::from("h") {
         Utils::ShowHelp();
     } else if *command == String::from("pow") {
-        let base = *&args[2].parse::<i64>().expect("Please enter a whole number");
+        let base = *&args[2].parse::<f64>().expect("Please enter a valid number");
         let exp = *&args[3]
             .parse::<u64>()
             .expect("Please enter a positive whole number");

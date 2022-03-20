@@ -31,12 +31,12 @@ pub mod Arithmetic {
 
         return ans;
     }
-    pub fn Pow(base: i64, exp: u64) -> i64 {
+    pub fn Pow(base: f64, exp: u64) -> f64 {
         if exp == 0 {
-            return 1;
+            return 1_f64;
         }
 
-        let mut ans = 1;
+        let mut ans = 1.0;
 
         for _ in 1..=exp {
             ans *= base;
@@ -70,8 +70,9 @@ mod Tests {
     use super::*;
     #[test]
     fn TestPow() {
-        assert_eq!(Arithmetic::Pow(4, 4), 256);
-        assert_eq!(Arithmetic::Pow(17, 0), 1);
+        assert_eq!(Arithmetic::Pow(4_f64, 4), 256_f64);
+        assert_eq!(Arithmetic::Pow(17_f64, 0), 1_f64);
+        assert_eq!(Arithmetic::Pow(2.5, 3), 15.625);
     }
 
     #[test]
