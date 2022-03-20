@@ -19,10 +19,16 @@ fn main() {
         println!("{}", Arithmetic::Pow(base, exp));
     } else if command == String::from("sqrt") {
         let num = &args[2].parse::<f64>().expect("Please enter a valid number");
-        let iters = &args[3]
-            .parse::<u32>()
-            .expect("Please enter a positive whole number");
-        println!("{}", Arithmetic::Sqrt(*num, *iters));
+        let iters = if args.len() > 2 {
+            Some(
+                *&args[2]
+                    .parse::<u32>()
+                    .expect("Please enter a positive whole number"),
+            )
+        } else {
+            None
+        };
+        println!("{}", Arithmetic::Sqrt(*num, iters));
     } else if command == String::from("fac") {
         let num = &args[2]
             .parse::<u64>()

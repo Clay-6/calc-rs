@@ -5,15 +5,21 @@ pub mod Utils {
         println!("The valid commands are:");
         println!("h - Show help");
         println!("pow [n] [e] - Calculate [n] to the power of [e]");
-        println!("sqrt [n] [i] - Calculate the square root of [n] with [i] iterations");
+        println!(
+            "sqrt [n] [i] - Calculate the square root of [n] with [i] iterations (defaults to 10)"
+        );
         println!("fac [n] - Calculate the factorial of [n]");
         println!("fib-upto [n] - Show a fibonacci sequence up to [n]");
         println!("fib-oflen [n] - Show a fibonacci sequence of length [n]");
     }
 }
 pub mod Arithmetic {
-    pub fn Sqrt(num: f64, iters: u32) -> f64 {
+    pub fn Sqrt(num: f64, iters: Option<u32>) -> f64 {
         let mut mean = (num + 1.0) / 2.0;
+        let iters = match iters {
+            Some(n) => n,
+            None => 10,
+        };
 
         for _ in 0..iters {
             let estimate = num / mean;
@@ -86,6 +92,7 @@ mod Tests {
 
     #[test]
     fn TestSqrt() {
-        assert_eq!(Arithmetic::Sqrt(5_f64, 10).round(), 2_f64);
+        assert_eq!(Arithmetic::Sqrt(5_f64, None).round(), 2_f64);
+        assert_eq!(Arithmetic::Sqrt(64_f64, Some(10)), 8.0);
     }
 }
