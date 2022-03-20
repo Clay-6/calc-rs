@@ -92,7 +92,7 @@ mod Tests {
 
     #[test]
     fn TestSqrt() {
-        assert_eq!(Arithmetic::Sqrt(5_f64, None).round(), 2_f64);
-        assert_eq!(Arithmetic::Sqrt(64_f64, Some(10)), 8.0);
+        assert_eq!(Arithmetic::Sqrt(100.0, None), 10.0);
+        assert_eq!(Arithmetic::Sqrt(64.0, Some(10)), 8.0);
     }
 }
