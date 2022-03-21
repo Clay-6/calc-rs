@@ -15,7 +15,11 @@ fn main() {
         Utils::ShowHelp();
     } else if command == String::from("pow") {
         let base = *&args[2].parse::<f64>().expect("Please enter a valid number");
-        let exp = *&args[3].parse::<i64>().expect("Please enter a whole number");
+        let exp = if args.len() > 3 {
+            Some(*&args[3].parse::<i64>().expect("Please enter a whole number"))
+        } else {
+            None
+        };
         println!("{}", Arithmetic::Pow(base, exp));
     } else if command == String::from("sqrt") {
         let num = &args[2].parse::<f64>().expect("Please enter a valid number");
