@@ -61,13 +61,12 @@ pub mod Arithmetic {
     }
     pub fn QuadraticFormula(a: f64, b: f64, c: f64, pos: bool) -> f64 {
         let ans = match pos {
-            true => 
-                (-b + Sqrt(Pow(b,None) + (4 * a * c))) / (2 * a)),
-            false =>  (-b - Sqrt(Pow(b, None) + (4*a*c)) / (2*a));
+            true => ((-b + Sqrt(Pow(b,Some(2)), Some(10)) - (4.0*a*c))) / (2.0*a),
+            false => (-b - Sqrt(Pow(b,Some(2)), Some(10)) - (4.0*a*c) / (2.0*a)),
         };
 
-        return ans;
-        }
+        ans
+}
     
 
 
