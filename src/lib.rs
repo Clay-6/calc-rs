@@ -59,7 +59,17 @@ pub mod Arithmetic {
             return ans;
         }
     }
-}
+    pub fn QuadraticFormula(a: f64, b: f64, c: f64, pos: bool) -> f64 {
+        let ans = match pos {
+            true => 
+                (-b + Sqrt(Pow(b,None) + (4 * a * c))) / (2 * a)),
+            false =>  (-b - Sqrt(Pow(b, None) + (4*a*c)) / (2*a));
+        };
+
+        return ans;
+        }
+    
+
 
 pub mod Fibonacci {
     pub fn UpTo(n: u64) {
