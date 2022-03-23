@@ -50,6 +50,8 @@ fn main() {
             .expect("Please enter a valid number.");
         let positive = if *&args[5] == String::from("n") || *&args[5] == String::from("neg") {
             false
+        } else if *&args[5] == String::from("pos") || *&args[5] == String::from("p") {
+            true
         } else {
             true
         };
