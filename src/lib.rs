@@ -61,15 +61,13 @@ pub mod Arithmetic {
     }
     pub fn QuadraticFormula(a: f64, b: f64, c: f64, pos: bool) -> f64 {
         let ans = match pos {
-            true => ((-b + Sqrt(Pow(b,Some(2)), Some(10)) - (4.0*a*c))) / (2.0*a),
-            false => (-b - Sqrt(Pow(b,Some(2)), Some(10)) - (4.0*a*c) / (2.0*a)),
+            true => (-b + Sqrt(Pow(b, Some(2)), Some(10)) - (4.0 * a * c)) / (2.0 * a),
+            false => (-b - Sqrt(Pow(b, Some(2)), Some(10)) - (4.0 * a * c) / (2.0 * a)),
         };
 
         ans
+    }
 }
-    
-
-
 pub mod Fibonacci {
     pub fn UpTo(n: u64) {
         let (mut a, mut b) = (0, 1);

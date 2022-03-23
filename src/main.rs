@@ -38,6 +38,23 @@ fn main() {
             .parse::<u64>()
             .expect("Please enter a positive whole number");
         println!("{}", Arithmetic::Factorial(*num));
+    } else if command == String::from("quad") || command == String::from("quadratic") {
+        let a = *&args[2]
+            .parse::<f64>()
+            .expect("Please enter a valid number.");
+        let b = *&args[3]
+            .parse::<f64>()
+            .expect("Please enter a valid number.");
+        let c = *&args[4]
+            .parse::<f64>()
+            .expect("Please enter a valid number.");
+        let positive = if *&args[5] == String::from("n") || *&args[5] == String::from("neg") {
+            false
+        } else {
+            true
+        };
+
+        println!("{}", Arithmetic::QuadraticFormula(a, b, c, positive))
     } else if command == String::from("fib-upto") {
         let max = &args[2]
             .parse::<u64>()
