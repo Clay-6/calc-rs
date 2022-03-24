@@ -2,8 +2,14 @@
 
 pub mod Utils {
     pub fn ShowHelp() {
-        println!("The valid commands are:");
         println!("h - Show help");
+        println!("The valid commands are:");
+        println!("add <x> <y> - Adds <x> & <y> together");
+        println!("sub <x> <y> - Does x - y");
+        println!("mult <x> <y> - Multiplies <x> & <y>");
+        println!("div <x> <y> - Performs x / y");
+        println!("quot <x> <y> - Performs <x> DIV <y> (calculates the quotient)");
+        println!("mod <x> <y> - Performs <x> MOD <y>");
         println!("pow <n> <e> - Calculate <n> to the power of <e> (defaults to 2)");
         println!(
             "sqrt <n> <i> - Calculate the square root of <n> with <i> iterations (defaults to 10)"
@@ -14,6 +20,24 @@ pub mod Utils {
     }
 }
 pub mod Arithmetic {
+    pub fn Multiply(x: f64, y: f64) -> f64 {
+        x * y
+    }
+    pub fn Divide(x: f64, y: f64) -> f64 {
+        x / y
+    }
+    pub fn Add(x: f64, y: f64) -> f64 {
+        x + y
+    }
+    pub fn Subtract(x: f64, y: f64) -> f64 {
+        x - y
+    }
+    pub fn Mod(x: f64, y: f64) -> f64 {
+        x % y
+    }
+    pub fn Quotient(x: f64, y: f64) -> i64 {
+        (x / y).floor() as i64
+    }
     pub fn Sqrt(n: f64, iters: Option<u32>) -> f64 {
         let mut mean = (n + 1.0) / 2.0;
         let iters = match iters {
