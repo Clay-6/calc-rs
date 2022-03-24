@@ -13,64 +13,76 @@ fn main() {
 
     if command == String::from("h") {
         Utils::ShowHelp();
-    } else if command == String::from("pow") {
-        let base = *&args[2].parse::<f64>().expect("Please enter a valid number");
-        let exp = if args.len() > 3 {
-            Some(*&args[3].parse::<i64>().expect("Please enter a whole number"))
-        } else {
-            None
-        };
-        println!("{}", Arithmetic::Pow(base, exp));
-    } else if command == String::from("sqrt") {
-        let num = &args[2].parse::<f64>().expect("Please enter a valid number");
-        let iters = if args.len() > 2 {
-            Some(
-                *&args[2]
-                    .parse::<u32>()
-                    .expect("Please enter a positive whole number"),
-            )
-        } else {
-            None
-        };
-        println!("{}", Arithmetic::Sqrt(*num, iters));
-    } else if command == String::from("fac") {
-        let num = &args[2]
-            .parse::<u64>()
-            .expect("Please enter a positive whole number");
-        println!("{}", Arithmetic::Factorial(*num));
-    } else if command == String::from("quad") || command == String::from("quadratic") {
-        let a = *&args[2]
-            .parse::<f64>()
-            .expect("Please enter a valid number.");
-        let b = *&args[3]
-            .parse::<f64>()
-            .expect("Please enter a valid number.");
-        let c = *&args[4]
-            .parse::<f64>()
-            .expect("Please enter a valid number.");
-        let positive = if *&args[5] == String::from("n") || *&args[5] == String::from("neg") {
-            false
-        } else if *&args[5] == String::from("pos") || *&args[5] == String::from("p") {
-            true
-        } else {
-            true
-        };
 
-        println!("{}", Arithmetic::QuadraticFormula(a, b, c, positive))
-    } else if command == String::from("fib-upto") {
-        let max = &args[2]
-            .parse::<u64>()
-            .expect("Please enter a positive whole number");
-        Fibonacci::UpTo(*max);
-    } else if command == String::from("fib-oflen") {
-        let limit = &args[2]
-            .parse::<u64>()
-            .expect("Please enter a positive whole number");
-        Fibonacci::OfLength(*limit);
-    } else {
-        eprintln!(
-            "Error: Invalid command \"{}\". Use command 'h' to see valid commands",
-            &command
-        );
+        match command.as_str() {
+            "add" => {
+                let x: f64 = *&args[2].parse().expect("Please enter a valid number");
+                let y: f64 = *&args[3].parse().expect("Please enter a valid number");
+                println!("{}", Arithmetic::Add(x, y));
+            }
+            "sub" => {
+                let x: f64 = *&args[2].parse().expect("Please enter a valid number");
+                let y: f64 = *&args[3].parse().expect("Please enter a valid number");
+                println!("{}", Arithmetic::Subtract(x, y));
+            }
+            "mult" => {
+                let x: f64 = *&args[2].parse().expect("Please enter a valid number");
+                let y: f64 = *&args[3].parse().expect("Please enter a valid number");
+                println!("{}", Arithmetic::Multiply(x, y));
+            }
+            "div" => {
+                let x: f64 = *&args[2].parse().expect("Please enter a valid number");
+                let y: f64 = *&args[3].parse().expect("Please enter a valid number");
+                println!("{}", Arithmetic::Divide(x, y));
+            }
+            "quot" => {
+                let x: f64 = *&args[2].parse().expect("Please enter a valid number");
+                let y: f64 = *&args[3].parse().expect("Please enter a valid number");
+                println!("{}", Arithmetic::Quotient(x, y));
+            }
+            "mod" => {
+                let x: f64 = *&args[2].parse().expect("Please enter a vaid number");
+                let y: f64 = *&args[3].parse().expect("Please enter a valid number");
+                println!("{}", Arithmetic::Mod(x, y));
+            }
+            "pow" => {
+                let base: f64 = *&args[2].parse().expect("Please enter a valid number");
+                let exp = if args.len() > 3 {
+                    Some(*&args[3].parse::<i64>().expect("Please enter a whole number"))
+                } else {
+                    None
+                };
+                println!("{}", Arithmetic::Pow(base, exp));
+            }
+            "sqrt" => {
+                let num: f64 = *&args[2].parse().expect("Please enter a valid number");
+                let iters: Option<u32> = if args.len() > 3 {
+                    Some(*&args[3].parse().expect("Please enter a whole number"))
+                } else {
+                    None
+                };
+                println!("{}", Arithmetic::Sqrt(num, iters));
+            }
+            "fac" => {
+                let num: u64 = *&args[2]
+                    .parse()
+                    .expect("Please enter a positive whole number");
+                println!("{}", Arithmetic::Factorial(num));
+            }
+            "fib-upto" => {
+                let limit: u64 = *&args[2]
+                    .parse()
+                    .expect("Please enter a positive whole number");
+                Fibonacci::UpTo(limit);
+            }
+            "fib-oflen" => {
+                let length: u64 = *&args[2].parse().expect("Please enter a valid number");
+                Fibonacci::OfLength(length);
+            }
+            cmd => eprintln!(
+                "Invalid command \"{}\" Use command 'h' to see valid commands",
+                cmd
+            ),
+        }
     }
 }
