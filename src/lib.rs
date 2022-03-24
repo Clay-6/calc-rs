@@ -114,6 +114,13 @@ pub mod Fibonacci {
 #[cfg(test)]
 mod Tests {
     use super::*;
+
+    #[test]
+    fn TestQuot() {
+        assert_eq!(Arithmetic::Quotient(10.0, 5.0), 2);
+        assert_eq!(Arithmetic::Quotient(17.0, 5.0), 3);
+    }
+
     #[test]
     fn TestPow() {
         assert_eq!(Arithmetic::Pow(4.0, Some(4)), 256_f64);
