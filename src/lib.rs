@@ -65,7 +65,7 @@ pub mod Arithmetic {
             }
         }
 
-        if n % 2 != 0 {
+        if n < 0 && n % 2 != 0 {
             ans = -ans
         }
 
