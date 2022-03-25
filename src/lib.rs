@@ -52,11 +52,21 @@ pub mod Arithmetic {
 
         return mean;
     }
-    pub fn Factorial(n: u64) -> u64 {
-        let mut ans = 1;
+    pub fn Factorial(n: i64) -> i128 {
+        let mut ans: i128 = 1;
 
-        for i in 1..=n {
-            ans *= i;
+        for i in 1..=n.abs() as i128 {
+            ans = match ans.checked_mul(i) {
+                Some(num) => num,
+                None => {
+                    println!("Overflow occured. Reached up to:");
+                    break;
+                }
+            }
+        }
+
+        if n % 2 != 0 {
+            ans = -ans
         }
 
         return ans;

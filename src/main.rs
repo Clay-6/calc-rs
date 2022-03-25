@@ -65,7 +65,7 @@ fn main() {
             println!("{}", Arithmetic::Sqrt(num, iters));
         }
         "fac" => {
-            let num: u64 = *&args[2]
+            let num: i64 = *&args[2]
                 .parse()
                 .expect("Please enter a positive whole number");
             println!("{}", Arithmetic::Factorial(num));
