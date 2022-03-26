@@ -15,7 +15,7 @@ fn main() {
         Utils::ShowHelp();
     }
 
-    match command.as_str() {
+    match command.as_str().to_lowercase().as_str() {
         "add" | "+" => {
             let x: f64 = *&args[2].parse().expect("Please enter a valid number");
             let y: f64 = *&args[3].parse().expect("Please enter a valid number");
@@ -44,7 +44,7 @@ fn main() {
         "mod" | "%" => {
             let x: f64 = *&args[2].parse().expect("Please enter a vaid number");
             let y: f64 = *&args[3].parse().expect("Please enter a valid number");
-            println!("{}", Arithmetic::Mod(x, y));
+            println!("{}", Arithmetic::Modulo(x, y));
         }
         "pow" | "^" => {
             let base: f64 = *&args[2].parse().expect("Please enter a valid number");

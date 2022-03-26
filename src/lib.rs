@@ -34,7 +34,7 @@ pub mod Arithmetic {
     pub fn Subtract(x: f64, y: f64) -> f64 {
         x - y
     }
-    pub fn Mod(x: f64, y: f64) -> f64 {
+    pub fn Modulo(x: f64, y: f64) -> f64 {
         x % y
     }
     pub fn Quotient(x: f64, y: f64) -> i64 {
@@ -94,14 +94,6 @@ pub mod Arithmetic {
         } else {
             return ans;
         }
-    }
-    pub fn QuadraticFormula(a: f64, b: f64, c: f64, pos: bool) -> f64 {
-        let ans = match pos {
-            true => (-b + Sqrt(Pow(b, Some(2)), Some(10)) - (4.0 * a * c)) / (2.0 * a),
-            false => (-b - Sqrt(Pow(b, Some(2)), Some(10)) - (4.0 * a * c) / (2.0 * a)),
-        };
-
-        ans
     }
 }
 pub mod Fibonacci {
