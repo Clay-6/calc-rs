@@ -47,13 +47,15 @@ fn main() {
 #[derive(Debug, Parser)]
 #[clap(author, version, about, long_about = None)]
 struct Args {
-    /// The operation to perform.
-    /// Possible values (Symbol aliases shown in square brackets if available): add[+], sub[-], mult[*], div[/], quot, mod[%], pow[^], sqrt, fac[!], fib-upto, fib-oflen.
+    /// The operation to perform
+    ///
+    /// Possible values (Symbol aliases shown in square brackets if available):
+    /// add[+], sub[-], mult[*], div[/], quot, mod[%], pow[^], sqrt, fac[!], fib-upto, fib-oflen.
     #[clap(short, long)]
     operation: String,
-    /// The first number to use in the operation.
+    /// The first number to use in the operation
     a: f64,
-    /// The second number to use in the operation.
+    /// The second number to use in the operation
     #[clap(default_value_t = 0.0)]
     b: f64,
 }
