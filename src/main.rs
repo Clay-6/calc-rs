@@ -1,88 +1,59 @@
 #![allow(non_snake_case)]
-use std::env;
+use clap::Parser;
 
-use Calculator::{Arithmetic, Fibonacci, Utils};
+use Calculator::{Arithmetic, Fibonacci};
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let command = if args.len() > 1 {
-        args[1].clone()
-    } else {
-        String::from(" ")
-    };
+    let args = Args::parse();
 
-    if command == String::from("h") {
-        Utils::ShowHelp();
-    }
-
-    match command.as_str().to_lowercase().as_str() {
+    match args.operation.as_str() {
         "add" | "+" => {
-            let x: f64 = *&args[2].parse().expect("Please enter a valid number");
-            let y: f64 = *&args[3].parse().expect("Please enter a valid number");
-            println!("{}", Arithmetic::Add(x, y));
+            println!("{}", Arithmetic::Add(args.a, args.b));
         }
         "sub" | "-" => {
-            let x: f64 = *&args[2].parse().expect("Please enter a valid number");
-            let y: f64 = *&args[3].parse().expect("Please enter a valid number");
-            println!("{}", Arithmetic::Subtract(x, y));
+            println!("{}", Arithmetic::Subtract(args.a, args.b));
         }
         "mult" | "*" => {
-            let x: f64 = *&args[2].parse().expect("Please enter a valid number");
-            let y: f64 = *&args[3].parse().expect("Please enter a valid number");
-            println!("{}", Arithmetic::Multiply(x, y));
+            println!("{}", Arithmetic::Multiply(args.a, args.b));
         }
         "div" | "/" => {
-            let x: f64 = *&args[2].parse().expect("Please enter a valid number");
-            let y: f64 = *&args[3].parse().expect("Please enter a valid number");
-            println!("{}", Arithmetic::Divide(x, y));
+            println!("{}", Arithmetic::Divide(args.a, args.b));
         }
         "quot" => {
-            let x: f64 = *&args[2].parse().expect("Please enter a valid number");
-            let y: f64 = *&args[3].parse().expect("Please enter a valid number");
-            println!("{}", Arithmetic::Quotient(x, y));
+            println!("{}", Arithmetic::Quotient(args.a, args.b));
         }
         "mod" | "%" => {
-            let x: f64 = *&args[2].parse().expect("Please enter a vaid number");
-            let y: f64 = *&args[3].parse().expect("Please enter a valid number");
-            println!("{}", Arithmetic::Modulo(x, y));
+            println!("{}", Arithmetic::Modulo(args.a, args.b));
         }
         "pow" | "^" => {
-            let base: f64 = *&args[2].parse().expect("Please enter a valid number");
-            let exp = if args.len() > 3 {
-                Some(*&args[3].parse::<i64>().expect("Please enter a whole number"))
-            } else {
-                None
-            };
-            println!("{}", Arithmetic::Pow(base, exp));
+            println!("{}", Arithmetic::Pow(args.a, Some(args.b as i64)));
         }
         "sqrt" => {
-            let num: f64 = *&args[2].parse().expect("Please enter a valid number");
-            let iters: Option<u32> = if args.len() > 3 {
-                Some(*&args[3].parse().expect("Please enter a whole number"))
-            } else {
-                None
-            };
-            println!("{}", Arithmetic::Sqrt(num, iters));
+            println!("{}", Arithmetic::Sqrt(args.a, Some(args.b as u32)));
         }
         "fac" | "!" => {
-            let num: i64 = *&args[2]
-                .parse()
-                .expect("Please enter a positive whole number");
-            println!("{}", Arithmetic::Factorial(num));
+            println!("{}", Arithmetic::Factorial(args.a as i64));
         }
         "fib-upto" => {
-            let limit: u64 = *&args[2]
-                .parse()
-                .expect("Please enter a positive whole number");
-            Fibonacci::UpTo(limit);
+            Fibonacci::UpTo(args.a as u64);
         }
         "fib-oflen" => {
-            let length: u64 = *&args[2].parse().expect("Please enter a valid number");
-            Fibonacci::OfLength(length);
+            Fibonacci::OfLength(args.a as u64);
         }
-        cmd => eprintln!(
-            "Invalid command \"{}\" Use command 'h' to see valid commands",
-            cmd
-        ),
+        cmd => eprintln!("Invalid command \"{}\" Use -h or --help for help", cmd),
     }
+}
+
+#[derive(Debug, Parser)]
+#[clap(author, version, about, long_about = None)]
+struct Args {
+    /// The operation to perform.
+    /// Possible values: add, sub, mult, div, quot, mod, pow, sqrt, fac, fib-upto, fib-oflen.
+    /// Can be substituted their mathematical symbol equivalents
+    /// (e.g. +, -, *, /, %, ^, sqrt, !, fib-upto, fib-oflen)
+    #[clap(short, long)]
+    operation: String,
+    a: f64,
+    #[clap(default_value_t = 0.0)]
+    b: f64,
 }

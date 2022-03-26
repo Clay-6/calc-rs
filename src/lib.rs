@@ -1,26 +1,5 @@
 #![allow(non_snake_case)]
 
-pub mod Utils {
-    pub fn ShowHelp() {
-        println!(
-            "The valid commands are the following (valid symbols shown in [square brackets]):"
-        );
-        println!("h - Show help");
-        println!("add[+] <x> <y> - Adds <x> & <y> together");
-        println!("sub[-] <x> <y> - Does x - y");
-        println!("mult[*] <x> <y> - Multiplies <x> & <y>");
-        println!("div[/] <x> <y> - Performs x / y");
-        println!("quot <x> <y> - Performs <x> DIV <y> (calculates the quotient)");
-        println!("mod[%] <x> <y> - Performs <x> MOD <y>");
-        println!("pow[^] <n> <e> - Calculate <n> to the power of <e> (defaults to 2)");
-        println!(
-            "sqrt <n> <i> - Calculate the square root of <n> with <i> iterations (defaults to 10)"
-        );
-        println!("fac[!] <n> - Calculate the factorial of <n>");
-        println!("fib-upto <n> - Show a fibonacci sequence up to <n>");
-        println!("fib-oflen <n> - Show a fibonacci sequence of length <n>");
-    }
-}
 pub mod Arithmetic {
     pub fn Multiply(x: f64, y: f64) -> f64 {
         x * y
