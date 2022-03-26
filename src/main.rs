@@ -16,22 +16,22 @@ fn main() {
     }
 
     match command.as_str() {
-        "add" => {
+        "add" | "+" => {
             let x: f64 = *&args[2].parse().expect("Please enter a valid number");
             let y: f64 = *&args[3].parse().expect("Please enter a valid number");
             println!("{}", Arithmetic::Add(x, y));
         }
-        "sub" => {
+        "sub" | "-" => {
             let x: f64 = *&args[2].parse().expect("Please enter a valid number");
             let y: f64 = *&args[3].parse().expect("Please enter a valid number");
             println!("{}", Arithmetic::Subtract(x, y));
         }
-        "mult" => {
+        "mult" | "*" => {
             let x: f64 = *&args[2].parse().expect("Please enter a valid number");
             let y: f64 = *&args[3].parse().expect("Please enter a valid number");
             println!("{}", Arithmetic::Multiply(x, y));
         }
-        "div" => {
+        "div" | "/" => {
             let x: f64 = *&args[2].parse().expect("Please enter a valid number");
             let y: f64 = *&args[3].parse().expect("Please enter a valid number");
             println!("{}", Arithmetic::Divide(x, y));
@@ -41,12 +41,12 @@ fn main() {
             let y: f64 = *&args[3].parse().expect("Please enter a valid number");
             println!("{}", Arithmetic::Quotient(x, y));
         }
-        "mod" => {
+        "mod" | "%" => {
             let x: f64 = *&args[2].parse().expect("Please enter a vaid number");
             let y: f64 = *&args[3].parse().expect("Please enter a valid number");
             println!("{}", Arithmetic::Mod(x, y));
         }
-        "pow" => {
+        "pow" | "^" => {
             let base: f64 = *&args[2].parse().expect("Please enter a valid number");
             let exp = if args.len() > 3 {
                 Some(*&args[3].parse::<i64>().expect("Please enter a whole number"))
@@ -64,7 +64,7 @@ fn main() {
             };
             println!("{}", Arithmetic::Sqrt(num, iters));
         }
-        "fac" => {
+        "fac" | "!" => {
             let num: i64 = *&args[2]
                 .parse()
                 .expect("Please enter a positive whole number");
