@@ -1,10 +1,7 @@
 #![allow(non_snake_case)]
 use clap::Parser;
 
-use Calculator::{
-    Arithmetic::{self, QuadraticFormula},
-    Fibonacci,
-};
+use Calculator::{Arithmetic, Fibonacci};
 
 fn main() {
     let args = Args::parse();
@@ -28,7 +25,7 @@ fn main() {
 
         "fac" | "!" => println!("{}", Arithmetic::Factorial(args.a as i64)),
 
-        "quadratic" => match QuadraticFormula(args.a, args.b, args.c) {
+        "quadratic" => match Arithmetic::QuadraticFormula(args.a, args.b, args.c) {
             None => println!("No real number solutions exist"),
             Some((x1, x2)) => println!("x1 = {}, x2 = {}", x1, x2),
         },
