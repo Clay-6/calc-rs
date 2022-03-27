@@ -19,12 +19,8 @@ pub mod Arithmetic {
     pub fn Quotient(x: f64, y: f64) -> i64 {
         (x / y).floor() as i64
     }
-    pub fn Sqrt(n: f64, iters: Option<u32>) -> f64 {
+    pub fn Sqrt(n: f64, iters: u32) -> f64 {
         let mut mean = (n + 1.0) / 2.0;
-        let iters = match iters {
-            Some(n) => n,
-            None => 10,
-        };
 
         for _ in 0..iters {
             let estimate = n / mean;
@@ -74,6 +70,18 @@ pub mod Arithmetic {
             return ans;
         }
     }
+    pub fn QuadraticFormula(a: f64, b: f64, c: f64) -> Option<(f64, f64)> {
+        let discriminant = b * b - 4.0 * a * c;
+
+        if discriminant < 0.0 {
+            return None;
+        }
+
+        let x1 = (-b + Sqrt(discriminant, 10)) / (2.0 * a);
+        let x2 = (-b - Sqrt(discriminant, 10)) / (2.0 * a);
+
+        return Some((x1, x2));
+    }
 }
 pub mod Fibonacci {
     pub fn UpTo(n: u64) {
@@ -120,7 +128,7 @@ mod Tests {
 
     #[test]
     fn TestSqrt() {
-        assert_eq!(Arithmetic::Sqrt(100.0, None), 10.0);
-        assert_eq!(Arithmetic::Sqrt(64.0, Some(10)), 8.0);
+        assert_eq!(Arithmetic::Sqrt(100.0, 10), 10.0);
+        assert_eq!(Arithmetic::Sqrt(64.0, 10), 8.0);
     }
 }
