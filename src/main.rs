@@ -25,10 +25,14 @@ fn main() {
 
         "fac" | "!" => println!("{}", Arithmetic::Factorial(args.a as i64)),
 
-        "quadratic" => match Arithmetic::QuadraticFormula(args.a, args.b, args.c) {
-            None => println!("No real number solutions exist"),
-            Some((x1, x2)) => println!("x1 = {}, x2 = {}", x1, x2),
-        },
+        "quadratic" => {
+            let ans = Arithmetic::QuadraticFormula(args.a, args.b, args.c);
+            if ans == (f64::NAN, f64::NAN) {
+                println!("No real number solutions exist");
+            } else {
+                println!("x1 = {}, x2 = {}", ans.0, ans.1);
+            }
+        }
 
         "fib-upto" => Fibonacci::UpTo(args.a as u64),
 

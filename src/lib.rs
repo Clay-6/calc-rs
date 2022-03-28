@@ -70,17 +70,17 @@ pub mod Arithmetic {
             return ans;
         }
     }
-    pub fn QuadraticFormula(a: f64, b: f64, c: f64) -> Option<(f64, f64)> {
+    pub fn QuadraticFormula(a: f64, b: f64, c: f64) -> (f64, f64) {
         let discriminant = b * b - 4.0 * a * c;
 
         if discriminant < 0.0 {
-            return None;
+            return (f64::NAN, f64::NAN);
         }
 
         let x1 = (-b + Sqrt(discriminant, 10)) / (2.0 * a);
         let x2 = (-b - Sqrt(discriminant, 10)) / (2.0 * a);
 
-        return Some((x1, x2));
+        return (x1, x2);
     }
 }
 pub mod Fibonacci {
