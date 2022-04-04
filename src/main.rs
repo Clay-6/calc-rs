@@ -3,17 +3,20 @@
 use clap::Parser;
 use Calculator::{Arithmetic, Fibonacci};
 
-static PI: f64 = 3.1415926;
+static PI: f64 = std::f64::consts::PI;
+static EULER: f64 = std::f64::consts::E;
 
 fn main() {
     let args = Args::parse();
 
     let a: f64 = match args.a.to_lowercase().as_str() {
         "pi" => PI,
+        "e" => EULER,
         num => num.parse().unwrap(),
     };
     let b: f64 = match args.b.to_lowercase().as_str() {
         "pi" => PI,
+        "e" => EULER,
         num => num.parse().unwrap(),
     };
 
@@ -39,6 +42,7 @@ fn main() {
         "quadratic" => {
             let c = match args.c.to_lowercase().as_str() {
                 "pi" => PI,
+                "e" => EULER,
                 num => num.parse().unwrap(),
             };
             let ans = Arithmetic::QuadraticFormula(a, b, c);

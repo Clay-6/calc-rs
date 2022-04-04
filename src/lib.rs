@@ -29,7 +29,7 @@ pub mod Arithmetic {
             mean = (mean + estimate) / 2.0;
         }
 
-        return mean;
+        mean
     }
     pub fn Factorial(n: i64) -> BigInt {
         let mut ans: BigInt = 1u64.into();
@@ -42,13 +42,10 @@ pub mod Arithmetic {
             ans = -ans
         }
 
-        return ans;
+        ans
     }
     pub fn Pow(base: f64, exponent: Option<i64>) -> f64 {
-        let exp = match exponent {
-            Some(e) => e,
-            None => 2,
-        };
+        let exp = exponent.unwrap_or(2);
 
         if exp == 0 {
             return 1.0;
@@ -61,9 +58,9 @@ pub mod Arithmetic {
         }
 
         if exp < 0 {
-            return 1.0 / ans;
+            1.0 / ans
         } else {
-            return ans;
+            ans
         }
     }
     pub fn QuadraticFormula(a: f64, b: f64, c: f64) -> (f64, f64) {
@@ -76,7 +73,7 @@ pub mod Arithmetic {
         let x1 = (-b + Sqrt(discriminant, 10)) / (2.0 * a);
         let x2 = (-b - Sqrt(discriminant, 10)) / (2.0 * a);
 
-        return (x1, x2);
+        (x1, x2)
     }
 }
 pub mod Fibonacci {
