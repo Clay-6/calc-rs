@@ -3,8 +3,8 @@
 use clap::Parser;
 use Calculator::{Arithmetic, Fibonacci};
 
-static PI: f64 = std::f64::consts::PI;
-static EULER: f64 = std::f64::consts::E;
+const PI: f64 = std::f64::consts::PI;
+const EULER: f64 = std::f64::consts::E;
 
 fn main() {
     let args = Args::parse();
