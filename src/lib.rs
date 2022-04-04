@@ -1,5 +1,4 @@
 #![allow(non_snake_case)]
-
 pub mod Arithmetic {
     pub fn Multiply(x: f64, y: f64) -> f64 {
         x * y

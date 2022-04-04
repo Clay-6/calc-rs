@@ -1,32 +1,47 @@
 #![allow(non_snake_case)]
-use clap::Parser;
 
+use clap::Parser;
 use Calculator::{Arithmetic, Fibonacci};
+
+static PI: f64 = 3.1415926;
 
 fn main() {
     let args = Args::parse();
 
+    let a: f64 = match args.a.to_lowercase().as_str() {
+        "pi" => PI,
+        num => num.parse().unwrap(),
+    };
+    let b: f64 = match args.b.to_lowercase().as_str() {
+        "pi" => PI,
+        num => num.parse().unwrap(),
+    };
+
     match args.operation.as_str() {
-        "add" | "+" => println!("{}", Arithmetic::Add(args.a, args.b)),
+        "add" | "+" => println!("{}", Arithmetic::Add(a, b)),
 
-        "sub" | "-" => println!("{}", Arithmetic::Subtract(args.a, args.b)),
+        "sub" | "-" => println!("{}", Arithmetic::Subtract(a, b)),
 
-        "mult" | "*" => println!("{}", Arithmetic::Multiply(args.a, args.b)),
+        "mult" | "*" => println!("{}", Arithmetic::Multiply(a, b)),
 
-        "div" | "/" => println!("{}", Arithmetic::Divide(args.a, args.b)),
+        "div" | "/" => println!("{}", Arithmetic::Divide(a, b)),
 
-        "quot" => println!("{}", Arithmetic::Quotient(args.a, args.b)),
+        "quot" => println!("{}", Arithmetic::Quotient(a, b)),
 
-        "mod" | "%" => println!("{}", Arithmetic::Modulo(args.a, args.b)),
+        "mod" | "%" => println!("{}", Arithmetic::Modulo(a, b)),
 
-        "pow" | "^" => println!("{}", Arithmetic::Pow(args.a, Some(args.b as i64))),
+        "pow" | "^" => println!("{}", Arithmetic::Pow(a, Some(b as i64))),
 
-        "sqrt" => println!("{}", Arithmetic::Sqrt(args.a, args.b as u32)),
+        "sqrt" => println!("{}", Arithmetic::Sqrt(a, b as u32)),
 
-        "fac" | "!" => println!("{}", Arithmetic::Factorial(args.a as i64)),
+        "fac" | "!" => println!("{}", Arithmetic::Factorial(a as i64)),
 
         "quadratic" => {
-            let ans = Arithmetic::QuadraticFormula(args.a, args.b, args.c);
+            let c = match args.c.to_lowercase().as_str() {
+                "pi" => PI,
+                num => num.parse().unwrap(),
+            };
+            let ans = Arithmetic::QuadraticFormula(a, b, c);
             if ans == (f64::NAN, f64::NAN) {
                 println!("No real number solutions exist");
             } else {
@@ -34,9 +49,9 @@ fn main() {
             }
         }
 
-        "fib-upto" => Fibonacci::UpTo(args.a as u64),
+        "fib-upto" => Fibonacci::UpTo(a as u64),
 
-        "fib-oflen" => Fibonacci::OfLength(args.a as u64),
+        "fib-oflen" => Fibonacci::OfLength(a as u64),
 
         cmd => eprintln!("Invalid command \"{}\" Use -h or --help for help", cmd),
     }
@@ -52,11 +67,11 @@ struct Args {
     #[clap(short, long)]
     operation: String,
     /// The first number to use in the operation
-    a: f64,
+    a: String,
     /// The second number to use in the operation
-    #[clap(default_value_t = 0.0)]
-    b: f64,
+    #[clap(default_value = "0.0")]
+    b: String,
     /// The third number to use in the operation. Only used for quadratic formula
-    #[clap(default_value_t = 0.0)]
-    c: f64,
+    #[clap(default_value = "0.0")]
+    c: String,
 }
