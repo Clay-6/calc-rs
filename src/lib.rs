@@ -1,5 +1,8 @@
 #![allow(non_snake_case)]
+
 pub mod Arithmetic {
+    use num_bigint::BigInt;
+
     pub fn Multiply(x: f64, y: f64) -> f64 {
         x * y
     }
@@ -28,17 +31,11 @@ pub mod Arithmetic {
 
         return mean;
     }
-    pub fn Factorial(n: i64) -> i128 {
-        let mut ans: i128 = 1;
+    pub fn Factorial(n: i64) -> BigInt {
+        let mut ans: BigInt = 1u64.into();
 
-        for i in 1..=n.abs() as i128 {
-            ans = match ans.checked_mul(i) {
-                Some(num) => num,
-                None => {
-                    println!("Overflow occured. Reached up to:");
-                    break;
-                }
-            }
+        for i in 1..=n.abs() {
+            ans *= BigInt::from(i);
         }
 
         if n < 0 && n % 2 != 0 {
@@ -122,7 +119,7 @@ mod Tests {
 
     #[test]
     fn TestFactorial() {
-        assert_eq!(Arithmetic::Factorial(5), 120);
+        assert_eq!(Arithmetic::Factorial(5), 120.into());
     }
 
     #[test]
