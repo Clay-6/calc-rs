@@ -11,7 +11,7 @@ pub fn eval(equation: &str) -> f64 {
         .collect::<Vec<String>>();
     let mut operators = get_operators(&parts);
 
-    let mut ans = parts[0].parse().unwrap_or(0.0);
+    let mut ans = 0.0;
 
     while let Some((idx, op)) = operators.pop_front() {
         let next = match parts[idx + 1].as_str() {
@@ -19,13 +19,18 @@ pub fn eval(equation: &str) -> f64 {
             "E" | "e" => E,
             n => n.parse().unwrap_or(0.0),
         };
+        let prev = match parts[idx - 1].as_str() {
+            "PI" | "pi" => PI,
+            "E" | "e" => E,
+            n => n.parse().unwrap(),
+        };
 
         match op.as_str() {
             "+" => ans += next,
             "-" => ans -= next,
             "*" => ans *= next,
             "/" => ans /= next,
-            "^" => ans = arithmetic::pow(ans, Some(next as i64)),
+            "^" => ans += arithmetic::pow(prev, Some(next as i64)),
             "%" => ans %= next,
             _ => continue,
         }

@@ -69,7 +69,7 @@ struct Args {
     /// The operation to perform
     ///
     /// Possible values (Symbol aliases shown in square brackets if available):
-    /// add[+], sub[-], mult[*], div[/], quot, mod[%], pow[^], sqrt, fac[!], quadratic, fib-upto, fib-oflen,
+    /// add[+], sub[-], mult[*], div[/], quot, mod[%], pow[^], sqrt, fac[!], quadratic, fib-upto, fib-oflen, eval
     #[clap(short, long)]
     operation: String,
     /// The first number to use in the operation.
@@ -78,7 +78,7 @@ struct Args {
     /// The second number to use in the operation
     #[clap(default_value = "0.0")]
     b: String,
-    /// The third number to use in the operation. Only used for quadratic formula
+    /// The third number to use in the operation. Only used in quadratic formula
     #[clap(default_value = "0.0")]
     c: String,
 }
