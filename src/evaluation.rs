@@ -1,6 +1,6 @@
 use crate::arithmetic;
+use std::collections::VecDeque;
 
-const OPERATORS: [&str; 6] = ["+", "-", "/", "*", "%", "^"];
 const PI: f64 = std::f64::consts::PI;
 const E: f64 = std::f64::consts::E;
 
@@ -9,11 +9,11 @@ pub fn eval(equation: &str) -> f64 {
         .split_whitespace()
         .map(|c| c.to_string())
         .collect::<Vec<String>>();
-    let operators = get_operators(&parts);
+    let mut operators = get_operators(&parts);
 
     let mut ans = parts[0].parse().unwrap_or(0.0);
 
-    for (idx, op) in operators {
+    while let Some((idx, op)) = operators.pop_front() {
         let next = match parts[idx + 1].as_str() {
             "PI" | "pi" => PI,
             "E" | "e" => E,
@@ -34,12 +34,18 @@ pub fn eval(equation: &str) -> f64 {
     ans
 }
 
-fn get_operators(parts: &[String]) -> Vec<(usize, String)> {
-    let mut res = Vec::new();
+fn get_operators(parts: &[String]) -> VecDeque<(usize, String)> {
+    let mut res = VecDeque::new();
 
     for (idx, part) in parts.iter().enumerate() {
-        if OPERATORS.contains(&part.as_str()) {
-            res.push((idx, part.clone()))
+        match part.as_str() {
+            "+" => res.push_back((idx, part.clone())),
+            "-" => res.push_back((idx, part.clone())),
+            "*" => res.push_front((idx, part.clone())),
+            "/" => res.push_front((idx, part.clone())),
+            "^" => res.push_front((idx, part.clone())),
+            "%" => res.push_front((idx, part.clone())),
+            _ => continue,
         }
     }
 
