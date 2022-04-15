@@ -1,58 +1,98 @@
-use crate::arithmetic;
-use std::collections::VecDeque;
+use anyhow::{anyhow, Result};
+use chumsky::prelude::*;
 
-const PI: f64 = std::f64::consts::PI;
-const E: f64 = std::f64::consts::E;
-
-pub fn eval(equation: &str) -> f64 {
-    let parts = equation
-        .split_whitespace()
-        .map(|c| c.to_string())
-        .collect::<Vec<String>>();
-    let mut operators = get_operators(&parts);
-
-    let mut ans = 0.0;
-
-    while let Some((idx, op)) = operators.pop_front() {
-        let next = match parts[idx + 1].as_str() {
-            "PI" | "pi" => PI,
-            "E" | "e" => E,
-            n => n.parse().unwrap_or(0.0),
-        };
-        let prev = match parts[idx - 1].as_str() {
-            "PI" | "pi" => PI,
-            "E" | "e" => E,
-            n => n.parse().unwrap(),
-        };
-
-        match op.as_str() {
-            "+" => ans += next,
-            "-" => ans -= next,
-            "*" => ans *= next,
-            "/" => ans /= next,
-            "^" => ans += arithmetic::pow(prev, Some(next as i64)),
-            "%" => ans %= next,
-            _ => continue,
+pub fn run(src: &str) -> Result<f64> {
+    match parser().parse(src) {
+        Ok(ast) => match eval(&ast) {
+            Ok(ans) => Ok(ans),
+            Err(e) => Err(anyhow!("Evaluation error: {}", e)),
+        },
+        Err(errs) => {
+            errs.into_iter()
+                .for_each(|e| eprintln!("Parse error: {}", e));
+            return Err(anyhow!("Parse Err"));
         }
     }
-
-    ans
 }
 
-fn get_operators(parts: &[String]) -> VecDeque<(usize, String)> {
-    let mut res = VecDeque::new();
+fn eval(expr: &Expr) -> Result<f64, String> {
+    use Expr::*;
 
-    for (idx, part) in parts.iter().enumerate() {
-        match part.as_str() {
-            "+" => res.push_back((idx, part.clone())),
-            "-" => res.push_back((idx, part.clone())),
-            "*" => res.push_front((idx, part.clone())),
-            "/" => res.push_front((idx, part.clone())),
-            "^" => res.push_front((idx, part.clone())),
-            "%" => res.push_front((idx, part.clone())),
-            _ => continue,
-        }
+    match expr {
+        Num(n) => Ok(*n),
+        Neg(a) => Ok(-eval(a)?),
+        Add(a, b) => Ok(eval(a)? + eval(b)?),
+        Sub(a, b) => Ok(eval(a)? - eval(b)?),
+        Mul(a, b) => Ok(eval(a)? * eval(b)?),
+        Div(a, b) => Ok(eval(a)? / eval(b)?),
+        Pow(a, b) => Ok(eval(a)?.powf(eval(b)?)),
+        Mod(a, b) => Ok(eval(a)? % eval(b)?),
     }
+}
 
-    res
+enum Expr {
+    Num(f64),
+
+    Neg(Box<Self>),
+
+    Pow(Box<Self>, Box<Self>),
+    Mod(Box<Self>, Box<Self>),
+
+    Add(Box<Self>, Box<Self>),
+    Sub(Box<Self>, Box<Self>),
+
+    Mul(Box<Self>, Box<Self>),
+    Div(Box<Self>, Box<Self>),
+}
+
+fn parser() -> impl Parser<char, Expr, Error = Simple<char>> {
+    recursive(|expr| {
+        let num = text::int(10)
+            .map(|s: String| Expr::Num(s.parse().unwrap()))
+            .padded();
+
+        let atom = num.or(expr.delimited_by(just('('), just(')')));
+
+        let op = |c| just(c).padded();
+
+        let unary = op('-')
+            .repeated()
+            .then(atom)
+            .foldr(|_op, rhs| Expr::Neg(Box::new(rhs)));
+
+        let pow = unary
+            .clone()
+            .then(
+                op('^')
+                    .to(Expr::Pow as fn(_, _) -> _)
+                    .or(op('%').to(Expr::Mod as fn(_, _) -> _))
+                    .then(unary)
+                    .repeated(),
+            )
+            .foldl(|lhs, (op, rhs)| op(Box::new(lhs), Box::new(rhs)));
+
+        let product = pow
+            .clone()
+            .then(
+                op('*')
+                    .to(Expr::Mul as fn(_, _) -> _)
+                    .or(op('/').to(Expr::Div as fn(_, _) -> _))
+                    .then(pow)
+                    .repeated(),
+            )
+            .foldl(|lhs, (op, rhs)| op(Box::new(lhs), Box::new(rhs)));
+
+        let sum = product
+            .clone()
+            .then(
+                op('+')
+                    .to(Expr::Add as fn(_, _) -> _)
+                    .or(op('-').to(Expr::Sub as fn(_, _) -> _))
+                    .then(product)
+                    .repeated(),
+            )
+            .foldl(|lhs, (op, rhs)| op(Box::new(lhs), Box::new(rhs)));
+
+        sum.padded()
+    })
 }

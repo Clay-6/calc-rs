@@ -6,5 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+anyhow = "1.0.56"
+chumsky = "0.8.0"
 clap = {version = "3.1.6", features = ["derive"]}
 num-bigint = "0.4.3"
