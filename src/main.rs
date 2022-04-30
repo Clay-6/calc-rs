@@ -1,6 +1,6 @@
 mod cli;
 
-use calculator::{arithmetic, evaluation, fibonacci};
+use calculator::{arithmetic, evaluation};
 use clap::Parser;
 use cli::{Args, Operation};
 
