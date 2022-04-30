@@ -30,7 +30,9 @@ pub enum Operation {
     ///
     /// Whole part of <A> / <B>
     Quot { a: f64, b: f64 },
-    /// Raise a given number to a given power
+    /// Raise a given number to a power
+    ///
+    /// Exponent will default to 2 if none is supplied
     Pow { base: f64, exponent: Option<i64> },
     /// Calculate the square root of the given number in the
     /// given number of iterations

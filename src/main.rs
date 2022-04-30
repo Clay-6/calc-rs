@@ -14,10 +14,7 @@ fn main() -> anyhow::Result<()> {
         Operation::Div { a, b } => println!("{}", a / b),
         Operation::Mod { a, b } => println!("{}", a % b),
         Operation::Quot { a, b } => println!("{}", (a / b).floor()),
-        Operation::Pow {
-            base: a,
-            exponent: b,
-        } => println!("{}", arithmetic::pow(a, b)),
+        Operation::Pow { base, exponent } => println!("{}", arithmetic::pow(base, exponent)),
         Operation::Sqrt { n, iters } => println!("{}", arithmetic::sqrt(n, iters)),
         Operation::Fact { n } => println!("{}", arithmetic::factorial(n)),
         Operation::Quadratic { a, b, c } => {
