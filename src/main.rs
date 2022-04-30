@@ -1,5 +1,8 @@
+mod cli;
+
 use calculator::{arithmetic, evaluation::run, fibonacci};
 use clap::Parser;
+use cli::Args;
 
 const PI: f64 = std::f64::consts::PI;
 const EULER: f64 = std::f64::consts::E;
@@ -63,24 +66,4 @@ fn main() -> anyhow::Result<()> {
     }
 
     Ok(())
-}
-
-#[derive(Debug, Parser)]
-#[clap(author, version, about, long_about = None)]
-struct Args {
-    /// The operation to perform
-    ///
-    /// Possible values (Symbol aliases shown in square brackets if available):
-    /// add[+], sub[-], mult[*], div[/], quot, mod[%], pow[^], sqrt, fac[!], quadratic, fib-upto, fib-oflen, eval
-    #[clap(short, long)]
-    operation: String,
-    /// The first number to use in the operation.
-    /// Used as the string to evaluate if `eval` is the passed operation
-    a: String,
-    /// The second number to use in the operation
-    #[clap(default_value = "0.0")]
-    b: String,
-    /// The third number to use in the operation. Only used in quadratic formula
-    #[clap(default_value = "0.0")]
-    c: String,
 }
