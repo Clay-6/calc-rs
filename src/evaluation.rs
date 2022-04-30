@@ -10,7 +10,7 @@ pub fn run(src: &str) -> Result<f64> {
         Err(errs) => {
             errs.into_iter()
                 .for_each(|e| eprintln!("Parse error: {}", e));
-            return Err(anyhow!("Parse Err"));
+            return Err(anyhow!(""));
         }
     }
 }

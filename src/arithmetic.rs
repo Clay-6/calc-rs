@@ -1,3 +1,4 @@
+use anyhow::{anyhow, Result};
 use num_bigint::BigInt;
 
 pub fn sqrt(n: f64, iters: u32) -> f64 {
@@ -42,15 +43,15 @@ pub fn pow(base: f64, exponent: Option<i64>) -> f64 {
         ans
     }
 }
-pub fn quadratic_formula(a: f64, b: f64, c: f64) -> (f64, f64) {
+pub fn quadratic_formula(a: f64, b: f64, c: f64) -> Result<(f64, f64)> {
     let discriminant = b * b - 4.0 * a * c;
 
     if discriminant < 0.0 {
-        return (f64::NAN, f64::NAN);
+        return Err(anyhow!("There are no real number roots for this quadratic"));
     }
 
     let x1 = (-b + sqrt(discriminant, 10)) / (2.0 * a);
     let x2 = (-b - sqrt(discriminant, 10)) / (2.0 * a);
 
-    (x1, x2)
+    Ok((x1, x2))
 }
