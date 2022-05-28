@@ -21,9 +21,9 @@ fn main() -> anyhow::Result<()> {
             let (x1, x2) = arithmetic::quadratic(a, b, c)?;
             println!("x1: {x1}, x2: {x2}");
         }
-        Operation::Sin { x } => println!("{}", f64::sin(x)),
-        Operation::Cos { x } => println!("{}", f64::cos(x)),
-        Operation::Tan { x } => println!("{}", f64::tan(x)),
+        Operation::Sin { x } => println!("{}", x.sin()),
+        Operation::Cos { x } => println!("{}", x.cos()),
+        Operation::Tan { x } => println!("{}", x.tan()),
         Operation::Eval { equation } => println!("{}", evaluation::run(&equation)?),
     }
 
