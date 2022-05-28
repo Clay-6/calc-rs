@@ -4,6 +4,15 @@ A command-line calculator written in Rust
 
 ## Installation
 
+### Through Cargo
+
+Ensure you have [rustup](https://rustup.rs) installed & the latest stable compiler through
+`rustup update stable`. Then, run
+
+```shell
+cargo install stable
+```
+
 ### Manual
 
 Download the [latest GitHub release](https://github.com/Clay-6/calc-rs/releases/latest) and
