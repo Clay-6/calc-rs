@@ -41,6 +41,12 @@ pub enum Operation {
     Fact { n: i64 },
     /// Solve the given quaratic equation
     Quadratic { a: f64, b: f64, c: f64 },
+    /// Find the sine of the given number <X>
+    Sin { x: f64 },
+    /// Find the cosine of the given number <X>
+    Cos { x: f64 },
+    /// Find the tangent of the given number <X>
+    Tan { x: f64 },
     /// Evaluate the given equation
     Eval { equation: String },
 }
