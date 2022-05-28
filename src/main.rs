@@ -1,7 +1,7 @@
 mod cli;
 
 use calc_rs::{arithmetic, evaluation};
-use clap::Parser;
+use clap::Parser as _;
 use cli::{Args, Operation};
 
 fn main() -> anyhow::Result<()> {
