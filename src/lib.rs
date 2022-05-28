@@ -7,11 +7,11 @@ mod tests {
 
     #[test]
     fn pow() {
-        assert_eq!(arithmetic::pow(4.0, Some(4)), 256_f64);
-        assert_eq!(arithmetic::pow(17.0, Some(0)), 1_f64);
-        assert_eq!(arithmetic::pow(2.5, Some(3)), 15.625);
-        assert_eq!(arithmetic::pow(16.0, Some(-2)), 0.00390625);
-        assert_eq!(arithmetic::pow(5.0, None), 25.0);
+        assert_eq!(arithmetic::pow(4.0, 4), 256_f64);
+        assert_eq!(arithmetic::pow(17.0, 0), 1_f64);
+        assert_eq!(arithmetic::pow(2.5, 3), 15.625);
+        assert_eq!(arithmetic::pow(16.0, -2), 0.00390625);
+        assert_eq!(arithmetic::pow(5.0, 2), 25.0);
     }
 
     #[test]

@@ -24,20 +24,18 @@ pub fn factorial(n: i64) -> BigInt {
 
     ans
 }
-pub fn pow(base: f64, exponent: Option<i64>) -> f64 {
-    let exp = exponent.unwrap_or(2);
-
-    if exp == 0 {
+pub fn pow(base: f64, exponent: i64) -> f64 {
+    if exponent == 0 {
         return 1.0;
     }
 
     let mut ans = 1.0;
 
-    for _ in 1..=exp.abs() {
+    for _ in 1..=exponent.abs() {
         ans *= base;
     }
 
-    if exp < 0 {
+    if exponent < 0 {
         1.0 / ans
     } else {
         ans
