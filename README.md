@@ -10,7 +10,7 @@ Ensure you have [rustup](https://rustup.rs) installed & the latest stable compil
 `rustup update stable`. Then, run
 
 ```shell
-cargo install stable
+cargo install calcrs
 ```
 
 ### Manual
