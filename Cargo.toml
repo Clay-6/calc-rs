@@ -1,5 +1,5 @@
 [package]
-name = "calc-rs"
+name = "calcrs"
 authors = ["Clayman"]
 description = "A command-line calculator with everything you need"
 license = "MIT"

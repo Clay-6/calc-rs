@@ -1,6 +1,6 @@
 mod cli;
 
-use calc_rs::{arithmetic, evaluation};
+use calcrs::{arithmetic, evaluation};
 use clap::Parser as _;
 use cli::{Args, Operation};
 
