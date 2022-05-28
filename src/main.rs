@@ -18,7 +18,7 @@ fn main() -> anyhow::Result<()> {
         Operation::Sqrt { n, iters } => println!("{}", arithmetic::sqrt(n, iters)),
         Operation::Fact { n } => println!("{}", arithmetic::factorial(n)),
         Operation::Quadratic { a, b, c } => {
-            let (x1, x2) = arithmetic::quadratic_formula(a, b, c)?;
+            let (x1, x2) = arithmetic::quadratic(a, b, c)?;
             println!("x1: {x1}, x2: {x2}");
         }
         Operation::Eval { equation } => println!("{}", evaluation::run(&equation)?),

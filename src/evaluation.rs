@@ -1,8 +1,9 @@
 use anyhow::{anyhow, Result};
 use chumsky::prelude::*;
 
-pub fn run(src: &str) -> Result<f64> {
-    match parser().parse(src) {
+/// Evaluates the provided `equation`
+pub fn run(equation: &str) -> Result<f64> {
+    match parser().parse(equation) {
         Ok(ast) => match eval(&ast) {
             Ok(ans) => Ok(ans),
             Err(e) => Err(anyhow!("Evaluation error: {}", e)),
@@ -12,21 +13,6 @@ pub fn run(src: &str) -> Result<f64> {
                 .for_each(|e| eprintln!("Parse error: {}", e));
             return Err(anyhow!(""));
         }
-    }
-}
-
-fn eval(expr: &Expr) -> Result<f64, String> {
-    use Expr::*;
-
-    match expr {
-        Num(n) => Ok(*n),
-        Neg(a) => Ok(-eval(a)?),
-        Add(a, b) => Ok(eval(a)? + eval(b)?),
-        Sub(a, b) => Ok(eval(a)? - eval(b)?),
-        Mul(a, b) => Ok(eval(a)? * eval(b)?),
-        Div(a, b) => Ok(eval(a)? / eval(b)?),
-        Pow(a, b) => Ok(eval(a)?.powf(eval(b)?)),
-        Mod(a, b) => Ok(eval(a)? % eval(b)?),
     }
 }
 
@@ -43,6 +29,21 @@ enum Expr {
 
     Mul(Box<Self>, Box<Self>),
     Div(Box<Self>, Box<Self>),
+}
+
+fn eval(expr: &Expr) -> Result<f64, String> {
+    use Expr::*;
+
+    match expr {
+        Num(n) => Ok(*n),
+        Neg(a) => Ok(-eval(a)?),
+        Add(a, b) => Ok(eval(a)? + eval(b)?),
+        Sub(a, b) => Ok(eval(a)? - eval(b)?),
+        Mul(a, b) => Ok(eval(a)? * eval(b)?),
+        Div(a, b) => Ok(eval(a)? / eval(b)?),
+        Pow(a, b) => Ok(eval(a)?.powf(eval(b)?)),
+        Mod(a, b) => Ok(eval(a)? % eval(b)?),
+    }
 }
 
 fn parser() -> impl Parser<char, Expr, Error = Simple<char>> {

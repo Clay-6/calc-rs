@@ -1,6 +1,8 @@
 use anyhow::{anyhow, Result};
 use num_bigint::BigInt;
 
+/// Finds the square root of the given number
+/// `n` using the Babylonian method in `iters` iterations
 pub fn sqrt(n: f64, iters: u32) -> f64 {
     let mut mean = (n + 1.0) / 2.0;
 
@@ -11,6 +13,8 @@ pub fn sqrt(n: f64, iters: u32) -> f64 {
 
     mean
 }
+
+/// Finds the factorial of `n`
 pub fn factorial(n: i64) -> BigInt {
     let mut ans: BigInt = 1u64.into();
 
@@ -24,24 +28,29 @@ pub fn factorial(n: i64) -> BigInt {
 
     ans
 }
-pub fn pow(base: f64, exponent: i64) -> f64 {
-    if exponent == 0 {
+
+/// Raises `n` to the power of `e`
+pub fn pow(n: f64, e: i64) -> f64 {
+    if e == 0 {
         return 1.0;
     }
 
     let mut ans = 1.0;
 
-    for _ in 1..=exponent.abs() {
-        ans *= base;
+    for _ in 1..=e.abs() {
+        ans *= n;
     }
 
-    if exponent < 0 {
+    if e < 0 {
         1.0 / ans
     } else {
         ans
     }
 }
-pub fn quadratic_formula(a: f64, b: f64, c: f64) -> Result<(f64, f64)> {
+
+/// Uses the quadratic formula to solve
+/// `a`x^2 * `b`x + c
+pub fn quadratic(a: f64, b: f64, c: f64) -> Result<(f64, f64)> {
     let discriminant = b * b - 4.0 * a * c;
 
     if discriminant < 0.0 {
