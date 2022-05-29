@@ -10,14 +10,14 @@ pub struct Args {
 
 #[derive(Debug, Subcommand)]
 pub enum Operation {
-    /// Add the given 2 numbers
-    Add { a: f64, b: f64 },
+    /// Find the sum of the given numbers
+    Add { operands: Vec<f64> },
     /// Subtract the given 2 numbers
     ///
     /// <A> - <B>
     Sub { a: f64, b: f64 },
-    /// Multiply the given 2 numbers
-    Mul { a: f64, b: f64 },
+    /// Find the product of the given numbers
+    Mul { operands: Vec<f64> },
     /// Divide the given 2 numbers
     ///
     /// <A> / <B>
