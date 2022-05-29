@@ -32,11 +32,14 @@ pub enum Operation {
     Quot { a: f64, b: f64 },
     /// Raise a given number to a given power
     Pow { base: f64, exponent: i64 },
-    /// Calculate the square root of the given number in the
-    /// given number of iterations
+    /// Calculate the square root of the given number
     ///
     /// Uses the babylonian method
-    Sqrt { n: f64, iters: u32 },
+    Sqrt {
+        n: f64,
+        #[clap(short, long = "iterations", default_value_t = 10)]
+        iters: u32,
+    },
     /// Calculate the factorial of the given number
     Fact { n: i64 },
     /// Solve the given quaratic equation
