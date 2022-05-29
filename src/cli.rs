@@ -42,7 +42,7 @@ pub enum Operation {
         iters: u32,
     },
     /// Calculate the factorial of the given number
-    Fact { n: i64 },
+    Fact { n: u64 },
     /// Solve the given quaratic equation
     Quadratic { a: f64, b: f64, c: f64 },
     /// Find the sine of the given number <X>

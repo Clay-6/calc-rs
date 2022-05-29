@@ -39,15 +39,11 @@ pub fn sqrt(n: f64, iters: u32) -> f64 {
 }
 
 /// Finds the factorial of `n`
-pub fn factorial(n: i64) -> BigInt {
+pub fn factorial(n: u64) -> BigInt {
     let mut ans: BigInt = 1u64.into();
 
-    for i in 1..=n.abs() {
+    for i in 1..=n {
         ans *= BigInt::from(i);
-    }
-
-    if n < 0 && n % 2 != 0 {
-        ans = -ans
     }
 
     ans
