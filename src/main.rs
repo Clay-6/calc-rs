@@ -9,9 +9,9 @@ fn main() -> anyhow::Result<()> {
 
     match args.operation {
         Operation::Add { operands } => println!("{}", operands.iter().sum::<f64>()),
-        Operation::Sub { a, b } => println!("{}", a - b),
+        Operation::Sub { operands } => println!("{}", arithmetic::sub(operands)),
         Operation::Mul { operands } => println!("{}", operands.iter().product::<f64>()),
-        Operation::Div { a, b } => println!("{}", a / b),
+        Operation::Div { operands } => println!("{}", arithmetic::div(operands)),
         Operation::Mod { a, b } => println!("{}", a % b),
         Operation::Quot { a, b } => println!("{}", (a / b).floor()),
         Operation::Pow { base, exponent } => println!("{}", arithmetic::pow(base, exponent)),

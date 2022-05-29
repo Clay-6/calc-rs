@@ -1,6 +1,26 @@
 use anyhow::{anyhow, Result};
 use num_bigint::BigInt;
 
+pub fn sub(xs: Vec<f64>) -> f64 {
+    let mut ans = xs[0];
+
+    for x in xs.iter().skip(1) {
+        ans -= x;
+    }
+
+    ans
+}
+
+pub fn div(xs: Vec<f64>) -> f64 {
+    let mut ans = xs[0];
+
+    for x in xs.iter().skip(1) {
+        ans /= x;
+    }
+
+    ans
+}
+
 /// Finds the square root of the given number
 /// `n` using the Babylonian method in `iters` iterations
 pub fn sqrt(n: f64, iters: u32) -> f64 {

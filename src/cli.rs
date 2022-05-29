@@ -12,16 +12,17 @@ pub struct Args {
 pub enum Operation {
     /// Find the sum of the given numbers
     Add { operands: Vec<f64> },
-    /// Subtract the given 2 numbers
+    /// Subtract the given numbers from
+    /// each other
     ///
-    /// <A> - <B>
-    Sub { a: f64, b: f64 },
+    /// Subtracts in series (<A> - <B> - <C> ...)
+    Sub { operands: Vec<f64> },
     /// Find the product of the given numbers
     Mul { operands: Vec<f64> },
-    /// Divide the given 2 numbers
+    /// Divide the given numbers by each other
     ///
-    /// <A> / <B>
-    Div { a: f64, b: f64 },
+    /// Divides in series (<A> / <B> / <C> ...)
+    Div { operands: Vec<f64> },
     /// Modulo of the given 2 numbers
     ///
     /// <A> % <B>
