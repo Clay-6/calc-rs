@@ -9,6 +9,10 @@ pub fn sqrt(n: f64, iters: u32) -> f64 {
     for _ in 0..iters {
         let estimate = n / mean;
         mean = (mean + estimate) / 2.0;
+
+        if mean * mean == n {
+            break;
+        }
     }
 
     mean
