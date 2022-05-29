@@ -1,6 +1,8 @@
 use anyhow::{anyhow, Result};
 use num_bigint::BigInt;
 
+/// Subtracts each number in the given [`Vec`] in
+/// sequence
 pub fn sub(xs: Vec<f64>) -> f64 {
     let mut ans = xs[0];
 
@@ -11,6 +13,8 @@ pub fn sub(xs: Vec<f64>) -> f64 {
     ans
 }
 
+/// Divides each number in the given [`Vec`] in
+/// sequence
 pub fn div(xs: Vec<f64>) -> f64 {
     let mut ans = xs[0];
 
@@ -21,8 +25,8 @@ pub fn div(xs: Vec<f64>) -> f64 {
     ans
 }
 
-/// Finds the square root of the given number
-/// `n` using the Babylonian method in `iters` iterations
+/// Finds the square root of the given number `n`
+/// using the Babylonian method in `iters` iterations
 pub fn sqrt(n: f64, iters: u32) -> f64 {
     let mut mean = (n + 1.0) / 2.0;
 
