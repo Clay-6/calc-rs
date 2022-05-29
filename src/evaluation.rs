@@ -56,18 +56,18 @@ fn parser() -> impl Parser<char, Expr, Error = Simple<char>> {
 
         let op = |c| just(c).padded();
 
-        let unary = op('-')
+        let neg = op('-')
             .repeated()
             .then(atom)
             .foldr(|_op, rhs| Expr::Neg(Box::new(rhs)));
 
-        let pow = unary
+        let pow = neg
             .clone()
             .then(
                 op('^')
                     .to(Expr::Pow as fn(_, _) -> _)
                     .or(op('%').to(Expr::Mod as fn(_, _) -> _))
-                    .then(unary)
+                    .then(neg)
                     .repeated(),
             )
             .foldl(|lhs, (op, rhs)| op(Box::new(lhs), Box::new(rhs)));
