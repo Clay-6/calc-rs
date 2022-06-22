@@ -45,14 +45,11 @@ pub enum Operation {
     Fact { n: u64 },
     /// Solve the given quaratic equation
     Quadratic { a: f64, b: f64, c: f64 },
-    /// Find the sine of the given number <X>
-    /// in radians
+    /// Find the sine of <X> in radians
     Sin { x: f64 },
-    /// Find the cosine of the given number <X>
-    /// in radians
+    /// Find the cosine of <X> in radians
     Cos { x: f64 },
-    /// Find the tangent of the given number <X>
-    /// in radians
+    /// Find the tangent of <X> in radians
     Tan { x: f64 },
     /// Evaluate the given equation
     Eval { equation: String },

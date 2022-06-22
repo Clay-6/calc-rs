@@ -25,8 +25,8 @@ pub fn div(xs: Vec<f64>) -> f64 {
     ans
 }
 
-/// Finds the square root of the given number `n`
-/// using the Babylonian method in `iters` iterations
+/// Finds the square root of `n` in `iters`
+/// iter ations using the Babylonian method
 pub fn sqrt(n: f64, iters: u32) -> f64 {
     let mut mean = (n + 1.0) / 2.0;
 
@@ -73,7 +73,7 @@ pub fn pow(n: f64, e: i64) -> f64 {
 }
 
 /// Uses the quadratic formula to solve
-/// `a`x^2 * `b`x + c
+/// `a`x^2 * `b`x + `c`
 pub fn quadratic(a: f64, b: f64, c: f64) -> Result<(f64, f64)> {
     if a == 0.0 {
         return Err(anyhow!("`a` cannot be zero"));
