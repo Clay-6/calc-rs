@@ -75,6 +75,10 @@ pub fn pow(n: f64, e: i64) -> f64 {
 /// Uses the quadratic formula to solve
 /// `a`x^2 * `b`x + c
 pub fn quadratic(a: f64, b: f64, c: f64) -> Result<(f64, f64)> {
+    if a == 0.0 {
+        return Err(anyhow!("`a` cannot be zero"));
+    }
+
     let discriminant = b * b - 4.0 * a * c;
 
     if discriminant < 0.0 {
